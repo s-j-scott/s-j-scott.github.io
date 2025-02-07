@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<title>Sebastian J. Scott - University of Bath</title>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+:root {
+   /* Colour scheme */
+   --header-colour: rgb(224, 224, 255);
+   --highlight-colour: #f2a365;
+   --cell1-colour: #30475e;
+   --cell2-colour: #222831;
+   --text-dark: #222831;
+   --text-light: #ececec;
+   --hover-colour: #f8b47f;
+   --link-colour: rgb(224, 224, 255);
+   --visited-link-colour: rgb(215, 180, 255);
+   /* Navigation bar offset */
+   --nav-height: 80px;
+}
+
+
+html {
+   scroll-behavior: smooth;
+   scroll-padding-top: var(--nav-height); /* Compensate for fixed navigation bar */
+ }
+
+ /* To add a file: chmod og+r ~ss2767/public_html/photo.gif */
+
+body { 
+   font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;  
+   background:var(--text-dark);  /* 3565ad nice colour */
+   margin: 0;
+   font-size: 1.3em;
+   padding-top: var(--nav-height); /* Compensate for fixed navigation bar */
+   }   
+:link { /* unvisited links */
+   background: transparent; 
+   color: var(--link-colour); 
+   text-decoration: none;
+   } 
+:visited { /* visited links */
+   background: transparent; 
+   color: var(--visited-link-colour); 
+   } 
+:link:hover, :visited:hover, :link:active, :visited:active { 
+   background: transparent; color: var(--highlight-colour); 
+   text-decoration: underline;
+   }
+dt {/* Descriptive term in a descriptive list */
+   color:var(--highlight-colour) ; font-weight: bold;
+}
+
+
+/* Social icons */
+.fa {
+  padding: 5px;
+  font-size: 30px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px 2px;
+}
+.fa:hover {
+    text-decoration: none;
+    color:#f2a365;
+}
+.fa-envelope, .fa-github, .fa-twitter, .fa-linkedin {
+  color: #ececec;
+}
+
+
+/* Navigation bar */
+.nav-container {
+   width: 100%;
+   background-color: var(--highlight-colour);
+   position: fixed;
+   margin: 0;   padding: 0;  top: 0;
+   box-sizing: border-box;
+}
+
+.navbar  {
+   display: grid;
+   grid-template-columns: 0.2fr auto 1fr;
+   margin: 0 auto; padding: 0; height: var(--nav-height);
+   width: 90%;
+   align-items: center;
+   box-sizing: border-box;
+   
+}
+
+#navbar-logo {
+   color:var(--text-dark);
+   justify-self: start;
+   font-size: 20px;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+.nav-menu {
+   display: grid;
+   grid-template-columns: repeat(6,auto);
+   list-style: none;
+   text-align: center;
+   width: 90%;
+   justify-self: end;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+
+}
+
+.nav-links {
+   color:var(--text-dark);
+   font-weight: bold;
+   padding: 15px;
+}
+.nav-links:hover{
+   color:var(--text-dark);
+   text-decoration: none;
+   background-color:var(--hover-colour);
+   transition: all 0.2s ease-out;
+}
+
+/* Mobile menu toggle button*/
+.menu-toggle .bar {
+   width: 25px;
+   height: 3px;
+   margin: 5px auto;
+   transition: all 0.3s ease-in-out;
+   background: var(--text-dark);
+}
+.menu-toggle{
+   padding: 5px 5px;
+}
+
+/* Change color of topnav links on hover */
+#nav-menu a:hover {background-color:var(--hover-colour); }
+
+/* Footer */
+.footer { 
+   height: 1.2em;
+   text-align: center;  
+   background: rgb(82, 82, 82); 
+   width: 100%;
+   position: relative;
+   bottom: 0px;
+   font-size: 80%;
+}
+
+.row{
+   padding: 16px 20%;
+   color: var(--text-light);
+   text-align: justify;
+   margin-top: .5em;
+   }
+/* Alternating colours between content rows */
+.row:nth-of-type(even){
+  background-color: var(--cell1-colour);
+}
+.row:nth-of-type(odd){
+  background-color: var(--text-dark);
+}
+h2{
+   border-bottom: thin solid;
+   font-size: 35px;
+   width: 100%;
+   text-align: center;
+}
+h1 { 
+   font-size: 50px;  
+   color:var(--text-light);
+   border-bottom: medium solid;
+   font-weight: bold;
+   }
+.column {
+  float: left;
+  width:33.33333%;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 1000px wide,  */
+@media screen and (max-width: 1000px) {
+   /* Collapsable nav bar */
+   .nav-menu {
+      display: grid;
+      grid-template-columns: auto;
+      background: var(--highlight-colour);
+      margin: 0;
+      width: 100%;
+      position: absolute;
+      top: 80px;
+      left: -100%;
+      opacity: 0;
+      transition: all 0.5s ease;
+   }
+   .nav-menu.active {
+      background: var(--highlight-colour);
+      left: 0;
+      opacity: 1;
+      transition: all 0.5s ease;
+   }
+   .nav-links{
+      text-align: center;
+      line-height: 60px;
+      width: 100%;
+      display: table;
+   }
+   .nav-links:hover {
+      transition: all 0.4s ease-out;
+   }
+   .nav-bar{
+      width: 100%;
+   }
+   #mobile-menu {
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      transform: translate(5%,20%);
+   }
+   .menu-toggle .bar {
+      display: block;
+      cursor: pointer;
+   }
+   .menu-toggle:hover {
+      cursor:pointer;
+   }
+   /* Change menu bar to cross when listing anchors */
+   #mobile-menu.is-active .bar:nth-child(2) {
+      opacity: 0;
+   }
+   #mobile-menu.is-active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+   }
+   #mobile-menu.is-active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+   }
+
+
+   /* make the columns stack on top of each other instead of next to each other */
+  .column {   
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .row{
+     padding: 8px 5%
+  }
+}
+
+
+</style>
+</head>
+
+
+
+<!-- Start of the document body -->
+<!-- ############################################################### -->
+<body>
+
+<div class="nav-container">
+   <div class="navbar">
+      <h1 id="navbar-logo"> SEBASTIAN J. SCOTT</h1>
+      <div class="menu-toggle" id="mobile-menu">
+         <span class="bar"></span>
+         <span class="bar"></span>
+         <span class="bar"></span>
+      </div>
+      <ul class="nav-menu">
+         <li><a href="#about" class="nav-links">HOME</a></li>
+         <li><a href="#research" class="nav-links">RESEARCH</a></li>
+         <li><a href="#publications" class="nav-links">PUBLICATIONS</a></li>
+         <li><a href="#tutoring" class="nav-links">TUTORING</a></li>
+         <li><a href="#personal" class="nav-links">CONTACT</a></li>
+      </ul>
+   </div>
+</div>
+
+<!-- Start of page content -->
+<!-- ############################################################### -->
+<div class="row" id="about">
+   <div class="column">
+      <h2 style="text-align:left; font-weight:bold; border-bottom:none;">Postdoctoral Researcher<br>
+         University of Würzburg</h2>
+      <p><a href="mailto:sebastian.scott@uni-wuerzburg.de" class="clean-link">sebastian.scott@uni-wuerzburg.de</a></p>
+   </div>
+
+   <div class = "column" style="text-align:center">
+      <img src="images/profile-picture.png" alt="" style="padding:15px; height:220px"> 
+   </div>
+   
+   <div class="column" style="text-align:right;">
+      <p><br>
+         01.020, Mathematik Ost  <br>
+         Emil-Fischer-Straße 40
+         University of Würzburg<br>
+         97074 Würzburg<br>
+         Germany<br>
+         </p>
+   </div>
+<div style="clear: both;"></div>
+</div>
+
+<!-- ############################################################### -->
+<div class="row" id="background">
+      <h2>ACADEMIC BACKGROUND</h2>
+      <p>I am currently a Postdoc in the <a href="https://www.mathematik.uni-wuerzburg.de/en/machinelearning/">
+         Mathematics of Machine Learning group</a> at <a href="https://www.uni-wuerzburg.de/en/university/">
+            Julius-Maximilians-Universität Würzburg (JMU)</a>, as part of the BMBF funded project
+             <a href="https://www.mathematik.uni-wuerzburg.de/en/comfort/news/">COMFORT</a>.
+    Before that I completed in 2025 an Integrated PhD in Statistical Applied Mathematics at the 
+         University of Bath, as part of the 7th cohort of the <a href="https://samba.ac.uk/">EPSRC SAMBa CDT</a>. 
+         I also completed my undergraduate at the University of Bath, where I graduated in summer 2020 with a first-class honours Master of Mathematics. 
+      </p>
+      <p> My PhD thesis on "Theoretical and Algorithmic Advances in Bilevel Learning for Inverse Problems" concerned how one can use machine learning
+         techniques when solving inverse problems. I was supervised by <a href="https://mehrhardt.github.io/">Dr Matthias J. Ehrhardt</a> 
+         and <a href="https://sites.google.com/view/silviaspersonalwebpage/silvias-homepage">Dr Silvia Gazzola</a> and passed my viva examination in January 2025.
+      </p>
+      <p>My undergraduate Masters dissertation on "efficient priorconditioning for edge enhancement in imaging" was 
+         supervised by <a href="https://sites.google.com/view/silviaspersonalwebpage/silvias-homepage">Dr Silvia Gazzola</a> and 
+         <a href="https://people.bath.ac.uk/masas/">Professor Alastair Spence</a>. The project involved the 
+         regularization of discrete ill-posed linear inverse problems and employing Krylov subspace methods that 
+         adaptively define edge-enhancing encodings between iterates.</p>
+      
+
+   </div>
+
+<!-- ############################################################### -->
+<div class="row" id="research">
+   <h2>RESEARCH</h2>  
+    <p>My mathematical interests primarily lie in numerical analysis, with inverse problems being a particular focus.
+      Inverse problems arise naturally in various applications such as medical imaging, wherin one has a quantity of interest (e.g. brain scan) but only has 
+      access to an indirect measurement (e.g. sinogram/output of a medical device) and an understanding of how these quantities
+      are related (e.g. radon transform).
+      The task is then: given this indirect measurement, what is associated quantity of interest that gives rise to said measurement?
+    </p>
+    <p>Due to noise in the measurement data, directly solving this problem often leads to a meaningless reconstruction of the quantity of interest.
+      Instead, one considers a "nearby" problem that is less sensitive to noise, but still representative of the orginal problem - a technqiue 
+      called variational regularisation. 
+My PhD concerned how one can use machine learning techniques, with mathematical guarantees, to solve inverse problems. 
+Specifically, we explored a nested optimisation problem that can be used to determine appropriate hyperparameter 
+values encountered in variationally regularised problems.
+   </p>
+
+   <p>During my MRes year of the Integrated PhD, I took the following modules:</p>
+   <dl>    <!--Descriptive list-->
+       <dt>Year-long: </dt> <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50264.html">MA50264</a>: Inter-disciplinary Research Project (IRP) concerning numerical methods for proton therapy treatment planning</dd>
+       <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50246.html">MA50246</a>: Student-led symposia and integrative think tanks</dd>
+       <dt>Semester 1: </dt> 
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA40198.html">MA40198</a>: Applied Statistical Inference</dd>
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50263.html">MA50263</a>: Mathematics of machine learning</dd>
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50183.html">MA50183</a>: Reading course on edge-enhancing regularisation methods in imaging</dd>
+       <dt>Semester 2: </dt>
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50250.html">MA50250</a>: Inverse problems, data assimilation and filtering</dd>
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50251.html">MA50251</a>: Applied stochastic differential equations</dd>
+         <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50215.html">MA50215</a>: Reading course on spectral theory and its applications</dd>
+   </dl>
+
+   <p>During my first year of research, the following taught modules were also taken:</p>
+   <dl>    <!--Descriptive list-->
+              <dt>Semester 1: </dt> <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50183.html">MA50183</a>: Reading course on the mathematics of deep learning</dd>
+       <dt>Semester 2: </dt>
+ <dd><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA50215.html">MA50215</a>: Reading course on biomedical denoising</dd>
+   </dl>
+</div>
+
+<!-- ############################################################### -->
+<div class="row" id="publications">
+   <h2>PUBLICATIONS</h2>     
+   <ul>
+      <li>Ehrhardt, M.J.; Gazzola, S.; Scott, S.J. <b>On Optimal Regularization Parameters via Bilevel Learning</b>.
+         Data-driven Models in Inverse Problems, De Gruyter, pp. 1-38. <a href="https://doi.org/10.1515/9783111251233-001">doi.org/10.1515/9783111251233-001</a>, 2025 </li>
+   </ul>
+   <ul>
+      <li>Ehrhardt, M.J.; Gazzola, Scott, S.J. <b>Efficient gradient-based methods for bilevel learning via recycling Krylov
+         subspaces</b>.
+         arXiv preprint: <a href="https://arxiv.org/abs/2412.08264">arXiv:2412.08264</a>, 2024      </li>
+   </ul>           
+   <ul>
+      <li>Benfenati, A; Chouzenoux, E; Franchini, G; Latva-Aijo, S; Narnhofer, D;
+         Pesquet, J-C; Scott, S.J.; Yousefi, M. <b>Majorization-Minimization for sparse SVMs</b>.
+         Advanced Techniques in Optimization for Machine Learning and
+Imaging. ATOMI 2022. Springer INdAM Series, vol 61. Springer, Singapore. <a href="https://doi.org/10.1007/978-981-97-6769-4 3">doi.org/10.1007/978-981-97-6769-4 3</a>, 2024      </li>
+   </ul>
+   <ul>
+      <li>Gazzola, S.; Scott, S.J.; Spence, A. <b>Flexible Krylov Methods for Edge Enhancement in Imaging</b>. J. Imaging 2021, 7, 216.
+       <a href="https://doi.org/10.3390/jimaging7100216">doi.org/10.3390/jimaging7100216</a>, 2021     </li>
+   </ul>
+</div>
+
+<!-- ############################################################### -->
+<div class="row" id="news">
+   <h2>NEWS</h2>     
+<dt>February 2025</dt>
+<ul>
+   <li>
+      I began a Postdoc position in the <a href="https://www.mathematik.uni-wuerzburg.de/en/machinelearning/">
+         Mathematics of Machine Learning group</a> at <a href="https://www.uni-wuerzburg.de/en/university/">
+            Julius-Maximilians-Universität Würzburg (JMU)</a>, as part of the BMBF funded project
+             <a href="https://www.mathematik.uni-wuerzburg.de/en/comfort/news/">COMFORT</a>.
+   </li>
+</ul>
+
+<dt>January 2025</dt>
+<ul>
+   <li>I successfully passed my PhD viva! I would like to thank <a href="https://yury-korolev.gitlab.io/">Yury Korolev</a> and <a href="">Luca Calatroni</a>
+for agreeing to be my examiners.   
+   </li>
+</ul>
+
+<dt>December 2024</dt>
+<ul>
+   <li>
+      Our preprint "Efficient gradient-based methods for bilevel learning via recycling Krylov subspaces" is 
+      <a href = "https://arxiv.org/abs/2412.08264"> now available on arXiv!</a> 
+   </li>
+</ul>
+
+<dt>October 2024</dt>
+<ul>
+   <li>Submitted my PhD thesis on  "Theoretical and Algorithmic Advances in Bilevel Learning for Inverse Problems" for which I was 
+      supervised by <a href="https://mehrhardt.github.io/">Dr Matthias J. Ehrhardt</a> 
+      and <a href="https://sites.google.com/view/silviaspersonalwebpage/silvias-homepage">Dr Silvia Gazzola</a></li>
+</ul>
+   <dt>September 2024 </dt>
+   <ul>
+   <li>Attended the <a href = "https://ima.org.uk/23503/4th-ima-conference-on-inverse-problems-from-theory-to-application/"> 4th IMA Conference on Inverse Problems: from theory to application. </a> and presented at the minisymposium 
+      Attendance was in part funded by the 
+      <a href = "https://ima.org.uk/support/grants/small-grant-scheme/">IMA Small Grant Scheme</a>. 
+   </li>
+   <li> Began a 2 month research visit at <a href = "https://www.tue.nl/en/"> TU/e</a>, hosted by <a href = "https://rduits.win.tue.nl/"> Remco Duits</a>.
+      This visit was possible thanks to the 
+      <a href = "https://www.se-remodel.eu/home">REMODEL</a> staff exchange project. 
+   </li>
+     </ul>
+    <dt>June 2024 </dt>
+   <ul>
+      <li>Attended the University of Bath Doctoral Celebration Evening
+         where I recieved a  <a href="https://www.bath.ac.uk/guides/nominate-someone-for-the-doctoral-recognition-awards/">Doctoral Recognition Award</a>.
+      </li>
+      </ul>
+   <dt>May 2024 </dt>
+   <ul>
+      <li>Gave a talk at the <a href="https://pintofscience.co.uk/event/from-fluids-to-image-processing">Pint of 
+         Science Festival</a>  about how one how one formulates and solves an 
+         inverse problem, with a focus on computerised tomography.
+      </li>
+      <li>Attended <a href = "https://ipms-conference.org/ipms2024/index.php"> IPMS24 </a> and presented at the minisymposium 
+         for <a href="https://ipms-conference.org/ipms2024/index.php/m10" >  Inverse and Control Problems for Evolution 
+            Equations and Variational Inequalities.</a> 
+            Attendance was in part funded by the <a href = "https://ima.org.uk/support/grants/qjmam-fund/"> QJMAM Fund for Applied Mathematics </a>.
+      </li>
+      </ul>
+   <dt>October 2023</dt>
+   <ul>
+      <li>Gave a talk at the <a href="https://www.henrywritermaths.com/pss">University of Bath Postgraduate Seminar Series (PSS)</a> on "What makes
+         a regulariser good?". This is based on our recent work <a href="https://arxiv.org/abs/2305.18394">"On Optimal Regualrization Parameters via Bilevel Learning"</a>.
+      </li>
+      <li>Attended the Ada Lovelace day at the University of Bath where I gave a lightning talk 
+         about Emilie du Chatelet </a>
+      </li>
+      </ul>
+
+   
+   <dt>September 2023</dt>
+      <ul>
+         <li>
+            Our preprint "Majorization-Minimization for sparse SVMs" is 
+            <a href = "https://arxiv.org/abs/2308.16858"> now available on arXiv!
+            </a> 
+            This is work started at the <a href = "https://sites.google.com/view/atomi-workshop/home"> ATOMI workshop</a> in June 2022.
+         </li>
+         </ul>
+
+   <dt>August 2023</dt>
+   <ul>
+      <li>Attended <a href = "https://iciam2023.org/"> ICIAM 2023 </a> and presented at the minisymposium for <a href="https://iciam2023.org/registered_data?id=00687" > Recent advances in deep learning-based inverse and imaging problems.</a> 
+      </li>
+      </ul>
+
+   <dt>July 2023</dt>
+   <ul>
+      <li>
+         Gave a talk at TU Graz to the <a href = "https://www.tugraz.at/institute/icg/research/team-pock">Vision, Learning and Optimization Group</a> about <a href = "https://arxiv.org/abs/2305.18394">Optimal Regularization Parameters via Bilevel Learning </a> 
+      </li>
+      <li> Started a 6 week research visit hosted by <a href = "https://www.tugraz.at/institute/icg/research/team-pock/people/pock/">Thomas Pock</a> at the Institute for Computer Graphs and Vision, TU Graz, Austria.
+         This visit was possible thanks to the 
+         <a href = "https://samba.ac.uk/"> SAMBa</a> internationalisation fund
+          and the <a href = "https://www.lms.ac.uk/grants/lms-travel-grants-early-career-researchers">LMS Travel Grants for Early Career Researchers</a>. 
+      </li>
+   </ul>
+
+   <dt>May 2023</dt>
+   <ul>
+      <li>Attended and gave a talk at the <a href = "https://www.siam.org/conferences/cm/conference/op23">2023 SIAM Conference on Optimization</a>, Seattle, 
+      about Learning the Regularization Parameter for Inverse Problems. Attendance was possible thanks to the
+      <a href = "https://www.siam.org/conferences/conference-support/siam-student-travel-awards">SIAM Student Travel Award</a>, and the
+      <a href = "https://ima.org.uk/support/grants/small-grant-scheme/">IMA Small Grant Scheme</a>.
+      <li>
+         Our preprint "On Optimal Regularization Parameters via Bilevel Learning" is 
+         <a href = "https://arxiv.org/abs/2305.18394"> now available on arXiv!</a> 
+      </li>
+   </ul>
+
+   <dt>January 2023</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://people.bath.ac.uk/rak53/ethics.html">SAMBa Ethics in Maths Reading and Discussion Group</a> about AI Generated Art</li>
+   </ul>
+
+  
+   <dt>December 2022</dt>
+   <ul>
+      <li>Attended the <a href = "https://maths4dl.com/newsevents/deep-learning-for-industry-workshop/">Deep learning for industry workshop</a>, Maths4DL, Unviersity of Bath </li>
+   </ul>
+
+   <dt>November 2022</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://mehrhardt.github.io/index.html#group">Bath Imaging Group seminar</a> about my current research</li>
+   </ul>
+
+   <dt>October 2022</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://caj50.github.io/PSS.html">University of Bath Postgraduate Seminar Series</a> about my current research</li>
+   </ul>
+
+   <dt>September 2022</dt>
+   <ul>
+      <li> Became secretary for the Bath SIAM-IMA student chapter</li>
+      <li>Attended and gave a talk at the <a href = "https://primo2022.units.it/content/primo-workshop-2022"> Post-graduate Researchers in Inverse Problems, Machine Learning, and Optimization (PRIMO) workshop</a></li>
+   </ul>
+
+   <dt>July 2022</dt>
+   <ul>
+      <li>Organised and attended the <a href = "https://people.bath.ac.uk/ss2767/SAMBa-Conf-2022.html"> Statistical Applied Mathematics at Bath (SAMBa) CDT conference</a>, University of Bath</li>
+      <li>Attended the <a href = "https://www.lms.ac.uk/events/maths-communication-workshops"> LMS Mathematics Communication workshop (beginner session)</a></li>
+      <li>Attended the <a href = "https://bathsymposium.ac.uk/symposium/analytic-and-geometric-approaches-to-machine-learning/"> Analytic and Geometric Approaches to Machine Learning</a>, University of Bath</li>
+   </ul>
+
+   <dt>June 2022</dt>
+   <ul>
+      <li>Invited to speak at the  <a href = "https://primo2022.units.it/content/primo-workshop-2022"> Post-graduate Researchers in Inverse Problems, Machine Learning, and Optimization (PRIMO) workshop</a></li>
+
+      <li>Attended and gave a lightning talk at <a href = "https://sites.google.com/view/atomi-workshop/home"> Advanced Techniques in Optimization for Machine learning and Imaging (ATOMI)</a>, INdAM workshop, Rome,
+         Italy</li>
+
+   </ul>
+
+
+      
+   <dt>May 2022</dt>
+   <ul>
+      <li>Presented a poster at the <a href="https://ima.org.uk/18111/3rd-ima-conference-on-inverse-problems-from-theory-to-application/">3rd IMA Conference for Inverse Problems from Theory to Application</a> in Edinburgh, United Kingdom</li>
+   </ul>
+   
+   <dt>April 2022</dt>
+   <ul>
+      <li>Attended and presented at the  <a href = "https://sites.google.com/view/silviaspersonalwebpage/events/workshop-recent-advances-in-computational-inverse-problems"> Recent advances in computational inverse problems workshop</a>, University of Bath</li>
+   
+      <li>Attended the <a href = "https://people.bath.ac.uk/td314/m4dlworkshop/m4dl-workshop.html"> Mathematics for deep learning opening workshop</a>, University of Bath</li>
+
+      <li> Invited to speak at the <a href="https://sites.google.com/view/silviaspersonalwebpage/events/workshop-recent-advances-in-computational-inverse-problems">Recent advances in computational inverse problems workshop</a> in Bath </li>
+      <li> Co-organiser of the 2022 SAMBa Summer Conference which will take place July 2022 </li>
+   </ul>
+   
+   <dt>March 2022</dt>
+   <ul>
+      <li>Attended the <a href = "https://www.siam.org/conferences/cm/conference/is22"> SIAM Imaging conference (IS22)</a></li>
+   </ul>
+
+   <dt>February 2022</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://people.bath.ac.uk/redg22/PSS.html">University of Bath Postgraduate Seminar Series</a> about using Wolfe conditions to choose the step length of a gradient-based iterative solver</li>
+   </ul>
+
+   <dt>January 2022</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://people.bath.ac.uk/rak53/ethics.html">SAMBa Ethics in Maths Reading and Discussion Group</a> about Cookies and Targeted Advertising</li>
+   </ul>
+
+   <dt>December 2021</dt>
+   <ul>
+      <li>Attended the <a href = "https://www.turing.ac.uk/events/interpretability-safety-and-security-ai"> Interpretability, safety, and security in AI</a> event by the Alan Turing Institute</li>
+   </ul>
+
+   <dt>October 2021</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://people.bath.ac.uk/redg22/PSS.html"> University of Bath Postgraduate Seminar Seriers</a> on parameter choice rules for choosing the regularisation parameter when solving inverse problems</li>
+      <li> Became an organiser of the <a href = "https://people.bath.ac.uk/redg22/PSS.html"> University of Bath Postgraduate Seminar Seriers (PSS)</a>, alongside <a href=" https://people.bath.ac.uk/redg22/">Ed Gallagher</a>, for the 2021-22 academic year</li>
+   </ul>
+
+   <dt>November 2021</dt>
+   <ul>
+      <li>Attended the <a href = "https://gateway.newton.ac.uk/event/tgm104"> Cantab Capital Institute for the Mathematics of Information – Industry Engagement</a> event</li>
+   </ul>
+
+   <dt>July 2021</dt>
+   <ul>
+      <li>Attended the <a href = "https://katdoesmaths.me/SAMBa-Conference/"> SAMBa conference</a>, University of Bath</li>
+   </ul>
+
+   <dt>June 2021</dt>
+   <ul>
+      <li>Gave a talk at the <a href = "https://jeremyworsfold.co.uk/pss/"> University of Bath Postgraduate Seminar Seriers</a> on my undergraduate masters project</li>
+   </ul>
+
+   <dt>May 2021</dt>
+   <ul>
+      <li>Attended the <a href = "https://samsi.info/programs-and-activities/semester-long-programs/program-on-numerical-analysis-in-data-science/numerical-analysis-in-data-science-transition-virtual-workshop/"> Numerical Analysis in Data Science Transition Virtual Workshop</a></li>
+
+      <li>Attended the <a href = "https://www.cmih.maths.cam.ac.uk/events/flip-side-pandemic-recent-advances-mathematics-information"> The Flip Side of the Pandemic: Recent Advances in the Mathematics of Information</a> event</li>
+   </ul>
+
+   <dt>March 2021</dt>
+   <ul>
+      <li>Attended the <a href = "https://www.bath.ac.uk/events/bath-women-in-maths-conference-2021/"> Bath Women in Maths Conference</a></li>
+   </ul>
+
+
+   <dt>November 2020</dt>
+   <ul>
+      <li>Attended the <a href = "https://gateway.newton.ac.uk/event/tgmw77"> Mathematical Foundations of Optimisation in Data Science</a> conference, CCIMI</li>
+   </ul>
+
+   <dt>October 2020</dt>
+   <ul>
+      <li>Attended the <a href = "https://ima.org.uk/16445/black-heroes-of-mathematics-conference-2020/"> Black Heroes of Mathematics Conference</a></li>
+      <li>Attended the <a href = "https://ima.org.uk/13533/ima-early-career-mathematicians-autumn-conference-2020/"> IMA Early Career Mathematicians’ Autumn Conference</a></li>
+   </ul>
+
+</div>
+
+
+<!-- ############################################################### -->
+<div class="row" id="tutoring">
+   <h2>TUTORING</h2>
+
+
+   <p>I have led tutorials for various modules at the University of Bath including:
+      <ul>
+         <li><i><a href="https://www.bath.ac.uk/catalogues/2022-2023/ma/MA10230.html">MA10230 Multivariable calculus and differential equations</a></i> in semester 1 of the 2018/19, 2020/21, 2021/22 and 2022/23 academic years</li>
+         <li><i><a href="https://www.bath.ac.uk/catalogues/2020-2021/ma/MA10265.html">MA10265 Programming and discrete mathematics</a> </i> in the semester 2 of the 2020/21 academic year</li>
+         <li><i><a href="https://www.bath.ac.uk/catalogues/2021-2022/ma/MA10276.html">MA10276 Programming, foundations and connections</a></i> in semester 2 of the 2021/22 academic year</li>
+         <li><i><a href="https://www.bath.ac.uk/catalogues/2022-2023/ma/MA20278.html">MA20278 Machine learning 1</a></i> in the semester 2 of the 2022/23 academic year</li>
+              </ul></p>
+</div>
+
+
+
+<!-- ############################################################### -->
+<div class="row" id="personal">
+   <h2>PERSONAL INFORMATION</h2>
+   <dl>    
+       <dt>Full Name: </dt> <dd>Mr Sebastian Scott</dd>
+       <dt>E-mail Address: </dt> <dd><a href="mailto:sebastian.scott@uni-wuerzburg.de">sebastian.scott@uni-wuerzburg.de</a></dd>
+       <dt>Postal Address: </dt> <dd><address>
+    Mr Sebastian Scott<br>
+Room: 01.020  <br>
+Building: Mathematik Ost (40) <br>
+Emil-Fischer-Straße 40 <br>
+97074 Würzburg <br>
+   Germany<br>
+       </address></dd>
+   </dl>
+</div>
+
+<!-- ############################################################### -->
+<div class="row"style="text-align: center;" id="social">
+   <h2>WHERE TO FIND ME</h2>
+   You can find and get in touch with me in a variety of ways which include but are not limited to</p>
+   
+   <a href="mailto:sebastian.scott@uni-wuerzburg.de" class="fa fa-envelope"></a>
+   <a href="https://www.linkedin.com/in/sebastian-scott/" class="fa fa-linkedin"></a>
+   <a href="https://github.com/s-j-scott" class="fa fa-github"></a>
+   <a href="https://scholar.google.com/citations?user=nMDIDbwAAAAJ" class="clean-link">GScholar</a>
+   <a href="https://orcid.org/0000-0003-3565-877X" class="clean-link">ORCiD</a>
+   <a href="https://www.researchgate.net/profile/Sebastian_Scott3?ev=hdr_xprf" class="clean-link">ResearchGate</a>
+
+</div>
+
+<div class="footer">
+  <div class="container">
+     Last updated February 2025
+     </div>
+</div>
+<!-- End of page content-->
+
+<!-- Collapsable navigation menu -->
+<script>
+   const menu = document.querySelector('#mobile-menu');
+   const menuLinks = document.querySelector('.nav-menu');
+
+   menu.addEventListener('click', function() {
+      menu.classList.toggle('is-active');
+      menuLinks.classList.toggle('active');
+   })
+   menuLinks.addEventListener('click', function() {
+      menu.classList.toggle('is-active');
+      menuLinks.classList.toggle('active');
+   })
+
+   
+</script>
+
+</html>
